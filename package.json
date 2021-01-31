@@ -19,6 +19,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@eventstore/db-client": "0.0.0-alpha.15",
     "@nestjs/common": "^7.6.7",
     "@nestjs/config": "^0.6.2",
     "@nestjs/core": "^7.6.7",
