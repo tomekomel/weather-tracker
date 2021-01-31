@@ -1,26 +1,36 @@
+import {
+  IsArray,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
+import { MainParametersDto } from './main-parameters.dto';
+import { Type } from 'class-transformer';
+import { WeatherConditionDto } from './weather-condition.dto';
+
 export class CurrentWeatherDto {
-  weatherConditions: [
-    {
-      title: string,
-      description: string,
-      icon: string,
-    }
-  ];
-  mainParameters: {
-    temperature: number,
-    temperatureFeels: number,
-    temperatureMin: number,
-    temperatureMax: number,
-    pressure: number,
-    humidity: number,
-  };
+  @IsArray()
+  weatherConditions: WeatherConditionDto[];
+
+  @Type(() => MainParametersDto)
+  @ValidateNested()
+  mainParameters: MainParametersDto;
+
+  @IsNumber()
+  @IsNotEmpty()
   visibility: number;
+
   wind: {
-    speed: number,
-    direction: number,
+    speed: number;
+    direction: number;
   };
+
   clouds: {
     all: number;
   };
+
+  @IsNumber()
+  @IsNotEmpty()
   calculationTime: number;
 }

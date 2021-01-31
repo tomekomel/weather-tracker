@@ -24,6 +24,7 @@
     "@nestjs/cqrs": "^7.0.1",
     "@nestjs/platform-express": "^6.0.0",
     "@nestjs/swagger": "^4.7.12",
+    "class-transformer": "^0.3.2",
     "class-validator": "^0.13.1",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
