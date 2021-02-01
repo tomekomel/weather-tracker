@@ -19,4 +19,12 @@ export class Weather extends AggregateRoot {
       }),
     );
   }
+
+  getCityId(): number {
+    return this.cityId;
+  }
+
+  getCityName(): string {
+    return this.cityName;
+  }
 }
