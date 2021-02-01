@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsArray,
   IsNotEmpty,
@@ -12,30 +13,31 @@ import { WindDto } from './wind.dto';
 
 export class CurrentWeatherDto {
   @IsArray()
+  @ApiProperty({ type: [WeatherConditionDto] })
   weatherConditions: WeatherConditionDto[];
 
   @Type(() => MainParametersDto)
   @ValidateNested()
+  @ApiProperty({ type: MainParametersDto })
   mainParameters: MainParametersDto;
 
   @IsNumber()
   @IsNotEmpty()
+  @ApiProperty({ type: 'number' })
   visibility: number;
-
-  @Type(() => CloudsDto)
-  @ValidateNested()
-  wind: {
-    speed: number;
-    direction: number;
-  };
 
   @Type(() => WindDto)
   @ValidateNested()
-  clouds: {
-    all: number;
-  };
+  @ApiProperty({ type: WindDto })
+  wind: WindDto;
+
+  @Type(() => CloudsDto)
+  @ValidateNested()
+  @ApiProperty({ type: CloudsDto })
+  clouds: CloudsDto;
 
   @IsNumber()
   @IsNotEmpty()
+  @ApiProperty({ type: 'number' })
   calculationTime: number;
 }
