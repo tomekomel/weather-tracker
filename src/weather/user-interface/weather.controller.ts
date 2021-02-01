@@ -28,7 +28,7 @@ export class WeatherController {
     description: 'Response when an unexpected exception was thrown',
   })
   async ingestCurrentWeather(@Body() currentWeatherDto: CurrentWeatherDto) {
-    await this.commandBus.execute(
+    return this.commandBus.execute(
       new IngestCurrentWeatherCommand(currentWeatherDto),
     );
   }
