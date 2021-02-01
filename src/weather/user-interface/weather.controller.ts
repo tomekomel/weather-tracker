@@ -7,7 +7,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { CurrentWeatherDto } from '../application/command/dtos/current-weather.dto';
-import { StoreCurrentWeatherCommand } from '../application/command/store-current-weather.command';
+import { IngestCurrentWeatherCommand } from '../application/command/ingest-current-weather.command';
 
 @ApiTags('weather')
 @Controller('weather')
@@ -27,9 +27,9 @@ export class WeatherController {
   @ApiInternalServerErrorResponse({
     description: 'Response when an unexpected exception was thrown',
   })
-  async storeCurrentWeather(@Body() currentWeatherDto: CurrentWeatherDto) {
+  async ingestCurrentWeather(@Body() currentWeatherDto: CurrentWeatherDto) {
     await this.commandBus.execute(
-      new StoreCurrentWeatherCommand(currentWeatherDto),
+      new IngestCurrentWeatherCommand(currentWeatherDto),
     );
   }
 }

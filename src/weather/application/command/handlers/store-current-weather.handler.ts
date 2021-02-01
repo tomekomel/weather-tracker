@@ -1,9 +1,9 @@
 import { CommandHandler, IEventHandler } from '@nestjs/cqrs';
-import { StoreCurrentWeatherCommand } from '../store-current-weather.command';
+import { IngestCurrentWeatherCommand } from '../ingest-current-weather.command';
 
-@CommandHandler(StoreCurrentWeatherCommand)
+@CommandHandler(IngestCurrentWeatherCommand)
 export class StoreCurrentWeatherHandler implements IEventHandler {
-  handle(command: StoreCurrentWeatherCommand) {
+  handle(command: IngestCurrentWeatherCommand) {
     console.log(command);
   }
 }

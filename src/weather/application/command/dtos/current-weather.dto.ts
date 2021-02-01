@@ -3,6 +3,7 @@ import {
   IsArray,
   IsNotEmpty,
   IsNumber,
+  IsString,
   ValidateNested,
 } from 'class-validator';
 import { MainParametersDto } from './main-parameters.dto';
@@ -40,4 +41,14 @@ export class CurrentWeatherDto {
   @IsNotEmpty()
   @ApiProperty({ type: 'number' })
   calculationTime: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  @ApiProperty({ type: 'number' })
+  cityId: number;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({ type: 'string' })
+  cityName: string;
 }

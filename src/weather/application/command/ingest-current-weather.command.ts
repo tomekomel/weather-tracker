@@ -1,6 +1,6 @@
 import { CurrentWeatherDto } from './dtos/current-weather.dto';
 
-export class StoreCurrentWeatherCommand {
+export class IngestCurrentWeatherCommand {
   constructor(private readonly currentWeatherDto: CurrentWeatherDto) {}
 
   getCurrentWeatherDto(): CurrentWeatherDto {
