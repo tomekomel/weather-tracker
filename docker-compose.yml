@@ -1,24 +1,6 @@
 version: "3"
 
 services:
-  eventstore.db:
-    image: eventstore/eventstore:20.10.0-buster-slim
-    environment:
-      EVENTSTORE_CLUSTER_SIZE: ${EVENTSTORE_CLUSTER_SIZE}
-      EVENTSTORE_RUN_PROJECTIONS: ${EVENTSTORE_CLUSTER_SIZE}
-      EVENTSTORE_START_STANDARD_PROJECTIONS: ${EVENTSTORE_CLUSTER_SIZE}
-      EVENTSTORE_EXT_TCP_PORT: ${EVENTSTORE_CLUSTER_SIZE}
-      EVENTSTORE_EXT_HTTP_PORT: ${EVENTSTORE_CLUSTER_SIZE}
-      EVENTSTORE_INSECURE: ${EVENTSTORE_CLUSTER_SIZE}
-      EVENTSTORE_ENABLE_EXTERNAL_TCP: ${EVENTSTORE_CLUSTER_SIZE}
-      EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP: ${EVENTSTORE_CLUSTER_SIZE}
-    ports:
-      - "1113:1113"
-      - "2113:2113"
-    volumes:
-      - eventstore-volume-data:/data/lib/eventstore
-      - eventstore-volume-logs:/data/log/eventstore
-
   mongo.db:
     image: mongo
     container_name: db_mongo
@@ -29,7 +11,6 @@ services:
 
   weather.service:
     depends_on:
-      - eventstore.db
       - mongo.db
     restart: always
     build: .
@@ -42,5 +23,3 @@ services:
 
 volumes:
   mongodata:
-  eventstore-volume-data:
-  eventstore-volume-logs:
