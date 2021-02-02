@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { IngestCurrentWeatherCommand } from '../ingest-current-weather.command';
 import { Weather } from '../../../domain/weather';
-import { WeatherRepository } from '../../../infrastructure/repositories/weather.repository';
+import { WeatherRepository } from '../../../infrastructure/command/repositories/weather.repository';
 
 @CommandHandler(IngestCurrentWeatherCommand)
 export class IngestCurrentWeatherHandler
