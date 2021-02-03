@@ -20,6 +20,18 @@ export class Weather extends AggregateRoot {
         currentWeather.mainParameters.temperatureFeels < -10,
       alertMessage: 'Be careful! It is freezing cold today!',
     },
+    {
+      name: 'Strong Wind Alert',
+      validationRule: (currentWeather: CurrentWeatherParameters) =>
+        currentWeather.wind.speed > 40,
+      alertMessage: 'Be careful! Strong wind today!',
+    },
+    {
+      name: 'Visibility Alert',
+      validationRule: (currentWeather: CurrentWeatherParameters) =>
+        currentWeather.visibility < 40,
+      alertMessage: 'Be careful! Low visibility today!',
+    },
   ];
 
   constructor() {
