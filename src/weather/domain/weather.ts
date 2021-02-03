@@ -2,6 +2,7 @@ import { CurrentWeatherParameters } from './current-weather.parameters';
 import { AggregateRoot } from '@nestjs/cqrs';
 import { CurrentWeatherIngestedEvent } from './events/current-weather-ingested.event';
 import { DigestedWeatherParameters } from './digested-weather.parameters';
+import { WeatherAlertsGeneratedEvent } from './events/weather-alerts-generated.event';
 
 export class Weather extends AggregateRoot {
   private digestedWeather: DigestedWeatherParameters;
@@ -30,18 +31,30 @@ export class Weather extends AggregateRoot {
   }
 
   onCurrentWeatherIngestedEvent(event: CurrentWeatherIngestedEvent) {
+    const alerts = this.generateAlerts(event.getProps());
     this.digestedWeather = {
       ...event.getProps(),
-      alerts: this.generateAlerts(event.getProps()),
+      alerts,
     };
+
+    if (alerts) {
+      this.apply(
+        new WeatherAlertsGeneratedEvent({
+          cityId: this.digestedWeather.cityId,
+          alerts: this.digestedWeather.alerts,
+        }),
+      );
+    }
   }
 
-  generateAlerts(currentWeather: CurrentWeatherParameters) {
-    return this.alertRules.map(alertRule => {
-      if (alertRule.validationRule(currentWeather)) {
-        return alertRule.alertMessage;
-      }
-    });
+  generateAlerts(currentWeather: CurrentWeatherParameters): string[] {
+    return this.alertRules
+      .map(alertRule => {
+        if (alertRule.validationRule(currentWeather)) {
+          return alertRule.alertMessage;
+        }
+      })
+      .filter(Boolean);
   }
 
   getDigestedWeather(): CurrentWeatherParameters {
