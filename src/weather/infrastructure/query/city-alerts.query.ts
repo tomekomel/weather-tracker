@@ -9,6 +9,6 @@ export class CityAlertsQuery {
   ) {}
 
   async getAlertsByCity(cityId: number): Promise<CityAlertsParameters[]> {
-    return this.cityAlertsModel.find({ cityId }).lean();
+    return this.cityAlertsModel.find({ cityId }, '-_id -__v').lean();
   }
 }

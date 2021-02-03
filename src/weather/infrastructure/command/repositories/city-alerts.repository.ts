@@ -11,9 +11,10 @@ export class CityAlertsRepository {
   ) {}
 
   async saveAlerts(cityAlerts: CityAlertsParameters) {
-    const digestedWeather = await new this.cityAlertsModel(
-      cityAlerts,
+    await this.cityAlertsModel.findOneAndUpdate(
+      { cityId: cityAlerts.cityId },
+      { $addToSet: { alerts: { $each: cityAlerts.alerts } } },
+      { useFindAndModify: true, new: true, upsert: true },
     );
-    await digestedWeather.save();
   }
 }
