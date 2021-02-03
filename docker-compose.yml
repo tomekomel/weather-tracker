@@ -3,9 +3,9 @@ version: "3"
 services:
   mongo.db:
     image: mongo
-    container_name: db_mongo
+    container_name: weather_mongo_db
     volumes:
-      - mongodata:/data/mongodb
+      - weather_mongo_data:/data/mongodb
     ports:
       - "27077:27017"
 
@@ -16,10 +16,12 @@ services:
     build: .
     ports:
       - "${APP_PORT}:${APP_PORT}"
+    environment:
+      - MONGODB_URI=mongodb://weather
     volumes:
       - .:/data/app
       - /data/app/node_modules
     env_file: .env
 
 volumes:
-  mongodata:
+  weather_mongo_data:

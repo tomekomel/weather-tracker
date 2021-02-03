@@ -14,6 +14,6 @@ export class IngestCurrentWeatherHandler
     weather.ingest(command.getCurrentWeatherDto());
 
     console.log('Command executed: ', command);
-    await this.weatherRepository.saveWeather(weather);
+    await this.weatherRepository.saveWeather(command.getCurrentWeatherDto());
   }
 }

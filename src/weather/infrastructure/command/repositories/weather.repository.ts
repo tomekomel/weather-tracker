@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { Weather } from '../../../domain/weather';
+import { CurrentWeatherInterface } from '../../../domain/current-weather.interface';
 
 @Injectable()
 export class WeatherRepository {
-  constructor() {}
+  constructor(
+  ) {}
 
-  async saveWeather(weather: Weather) {}
+  async saveWeather(currentWeather: CurrentWeatherInterface) {
+  }
 }
