@@ -1,15 +1,10 @@
-import { CurrentWeatherInterface } from '../current-weather.interface';
+import { CurrentWeatherParameters } from '../current-weather.parameters';
 import { IEvent } from '@nestjs/cqrs';
 
-interface CurrentWeatherIngestedEventProp {
-  cityId: number;
-  cityName: string;
-  currentWeather: CurrentWeatherInterface;
-}
 export class CurrentWeatherIngestedEvent implements IEvent {
-  constructor(private readonly props: CurrentWeatherIngestedEventProp) {}
+  constructor(private readonly props: CurrentWeatherParameters) {}
 
-  getProps(): CurrentWeatherIngestedEventProp {
+  getProps(): CurrentWeatherParameters {
     return this.props;
   }
 }

@@ -1,4 +1,4 @@
-export interface CurrentWeatherInterface {
+export interface CurrentWeatherParameters {
   weatherConditions: Array<{
     title: string;
     description: string;
@@ -22,4 +22,6 @@ export interface CurrentWeatherInterface {
     all: number;
   };
   calculationTime: number;
+  cityId: number;
+  cityName: string;
 }

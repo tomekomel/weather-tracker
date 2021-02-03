@@ -1,30 +1,23 @@
-import { CurrentWeatherInterface } from './current-weather.interface';
+import { CurrentWeatherParameters } from './current-weather.parameters';
 import { AggregateRoot } from '@nestjs/cqrs';
 import { CurrentWeatherIngestedEvent } from './events/current-weather-ingested.event';
 
 export class Weather extends AggregateRoot {
-  constructor(
-    private readonly cityId: number,
-    private readonly cityName: string,
-  ) {
+  private currentWeather: CurrentWeatherParameters;
+
+  constructor() {
     super();
   }
 
-  ingest(currentWeather: CurrentWeatherInterface) {
-    this.apply(
-      new CurrentWeatherIngestedEvent({
-        cityId: this.cityId,
-        cityName: this.cityName,
-        currentWeather,
-      }),
-    );
+  ingest(currentWeather: CurrentWeatherParameters) {
+    this.apply(new CurrentWeatherIngestedEvent(currentWeather));
   }
 
-  getCityId(): number {
-    return this.cityId;
+  onCurrentWeatherIngestedEvent(event: CurrentWeatherIngestedEvent) {
+    this.currentWeather = event.getProps();
   }
 
-  getCityName(): string {
-    return this.cityName;
+  getCurrentWeather(): CurrentWeatherParameters {
+    return this.currentWeather;
   }
 }

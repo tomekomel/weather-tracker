@@ -1,14 +1,6 @@
 version: "3"
 
 services:
-  mongo.db:
-    image: mongo
-    container_name: weather_mongo_db
-    volumes:
-      - weather_mongo_data:/data/mongodb
-    ports:
-      - "27077:27017"
-
   weather.service:
     depends_on:
       - mongo.db
@@ -17,11 +9,21 @@ services:
     ports:
       - "${APP_PORT}:${APP_PORT}"
     environment:
-      - MONGODB_URI=mongodb://weather
+      - MONGODB_URI=mongodb://nestmongo/weather
     volumes:
       - .:/data/app
       - /data/app/node_modules
     env_file: .env
 
+  mongo.db:
+    image: mongo
+    container_name: nestmongo
+    volumes:
+      - mongo_data:/data/mongodb
+    environment:
+      MONGO_INITDB_ROOT_DATABASE: ${DATABASE_NAME}
+    ports:
+      - "${DATABASE_PORT}:${DATABASE_PORT}"
+
 volumes:
-  weather_mongo_data:
+  mongo_data:

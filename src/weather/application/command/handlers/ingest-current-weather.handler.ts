@@ -1,4 +1,4 @@
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { IngestCurrentWeatherCommand } from '../ingest-current-weather.command';
 import { Weather } from '../../../domain/weather';
 import { WeatherRepository } from '../../../infrastructure/command/repositories/weather.repository';
@@ -6,14 +6,16 @@ import { WeatherRepository } from '../../../infrastructure/command/repositories/
 @CommandHandler(IngestCurrentWeatherCommand)
 export class IngestCurrentWeatherHandler
   implements ICommandHandler<IngestCurrentWeatherCommand> {
-  constructor(private readonly weatherRepository: WeatherRepository) {}
+  constructor(
+    private readonly weatherRepository: WeatherRepository,
+    private readonly publisher: EventPublisher,
+  ) {}
 
   async execute(command: IngestCurrentWeatherCommand) {
-    const { cityId, cityName } = command.getCurrentWeatherDto();
-    const weather = new Weather(cityId, cityName);
-    weather.ingest(command.getCurrentWeatherDto());
+    const weather = this.publisher.mergeObjectContext(new Weather());
 
-    console.log('Command executed: ', command);
-    await this.weatherRepository.saveWeather(command.getCurrentWeatherDto());
+    weather.ingest(command.getCurrentWeatherDto());
+    await this.weatherRepository.saveWeather(weather);
+    weather.commit();
   }
 }
