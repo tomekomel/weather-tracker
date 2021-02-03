@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Document, Model } from 'mongoose';
-import { Weather } from '../../../domain/weather';
-import { DigestedWeatherParameters } from '../../../domain/digested-weather.parameters';
+import { Weather } from '../../../domain';
+import { DigestedWeatherParameters } from '../../../domain';
 
 @Injectable()
 export class WeatherRepository {

@@ -1,8 +1,8 @@
 import { CurrentWeatherParameters } from './current-weather.parameters';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { CurrentWeatherIngestedEvent } from './events/current-weather-ingested.event';
+import { CurrentWeatherIngestedEvent } from './events';
 import { DigestedWeatherParameters } from './digested-weather.parameters';
-import { WeatherAlertsGeneratedEvent } from './events/weather-alerts-generated.event';
+import { WeatherAlertsGeneratedEvent } from './events';
 
 export class Weather extends AggregateRoot {
   private digestedWeather: DigestedWeatherParameters;

@@ -1,4 +1,4 @@
-import { CurrentWeatherIngestedEvent } from '../../../domain/events/current-weather-ingested.event';
+import { CurrentWeatherIngestedEvent } from '../../../domain';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { Logger } from '@nestjs/common';
 

@@ -1,5 +1,5 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { WeatherAlertsGeneratedEvent } from '../../../domain/events/weather-alerts-generated.event';
+import { WeatherAlertsGeneratedEvent } from '../../../domain';
 import { CityAlertsReadModelRepository } from '../repositories/city-alerts-read-model.repository';
 import { Logger } from '@nestjs/common';
 

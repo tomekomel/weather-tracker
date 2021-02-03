@@ -7,6 +7,7 @@ import { CurrentWeatherDto } from './weather/application/command/dtos/current-we
 import { CloudsDto } from './weather/application/command/dtos/clouds.dto';
 import { MainParametersDto } from './weather/application/command/dtos/main-parameters.dto';
 import { WeatherConditionDto } from './weather/application/command/dtos/weather-condition.dto';
+import { CityAlertsDto } from './weather/application/query/dtos/city-alerts.dto';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -24,6 +25,7 @@ async function bootstrap() {
       CloudsDto,
       MainParametersDto,
       WeatherConditionDto,
+      CityAlertsDto,
     ],
   });
   SwaggerModule.setup('api', app, document);

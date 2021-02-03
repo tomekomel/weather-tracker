@@ -1,6 +1,6 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { IngestCurrentWeatherCommand } from '../ingest-current-weather.command';
-import { Weather } from '../../../domain/weather';
+import { Weather } from '../../../domain';
 import { WeatherRepository } from '../../../infrastructure/command/repositories/weather.repository';
 
 @CommandHandler(IngestCurrentWeatherCommand)

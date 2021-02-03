@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Document, Model } from 'mongoose';
-import { CityAlertsParameters } from '../../../domain/city-alerts.parameters';
+import { CityAlertsParameters } from '../../../domain';
 
 @Injectable()
 export class CityAlertsReadModelRepository {
