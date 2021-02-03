@@ -9,7 +9,7 @@ import { eventHandlers } from './infrastructure/command/event-handlers';
 import { cityAlertsSchema } from './infrastructure/models/schemas/city-alerts.schema';
 import { queryHandlers } from './application/query/handlers';
 import { CityAlertsQuery } from './infrastructure/query/city-alerts.query';
-import { CityAlertsRepository } from './infrastructure/command/repositories/city-alerts.repository';
+import { CityAlertsReadModelRepository } from './infrastructure/command/repositories/city-alerts-read-model.repository';
 
 @Module({
   imports: [
@@ -25,7 +25,7 @@ import { CityAlertsRepository } from './infrastructure/command/repositories/city
     ...eventHandlers,
     ...queryHandlers,
     CityAlertsQuery,
-    CityAlertsRepository,
+    CityAlertsReadModelRepository,
   ],
   controllers: [WeatherController],
 })

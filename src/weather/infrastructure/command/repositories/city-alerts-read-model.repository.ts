@@ -4,7 +4,7 @@ import { Document, Model } from 'mongoose';
 import { CityAlertsParameters } from '../../../domain/city-alerts.parameters';
 
 @Injectable()
-export class CityAlertsRepository {
+export class CityAlertsReadModelRepository {
   constructor(
     @InjectModel('CityAlerts')
     private readonly cityAlertsModel: Model<CityAlertsParameters & Document>,
