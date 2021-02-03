@@ -16,6 +16,7 @@ export class IngestCurrentWeatherHandler
 
     weather.ingest(command.getCurrentWeatherDto());
     await this.weatherRepository.saveWeather(weather);
+
     weather.commit();
   }
 }
