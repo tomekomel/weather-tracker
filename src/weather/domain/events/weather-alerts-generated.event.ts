@@ -1,6 +1,6 @@
 import { IEvent } from '@nestjs/cqrs';
 
-interface WeatherAlertsGeneratedEventProps {
+export interface WeatherAlertsGeneratedEventProps {
   cityId: number;
   alerts: string[];
 }
